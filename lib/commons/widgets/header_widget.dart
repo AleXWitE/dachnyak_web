@@ -117,7 +117,8 @@ class _HeaderLineState extends State<HeaderLine> {
           ),
         ),
         itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-              PopupMenuItem(
+          const PopupMenuDivider(height: 2.0,),
+          PopupMenuItem(
                   mouseCursor: SystemMouseCursors.click,
                   onTap: () {
                     _provider.changeTitle("О компании");
@@ -130,7 +131,7 @@ class _HeaderLineState extends State<HeaderLine> {
                           ? Colors.greenAccent
                           : Colors.white,
                       child: const Text("О компании"))),
-              const PopupMenuDivider(),
+              const PopupMenuDivider(height: 2.0,),
               PopupMenuItem(
                   mouseCursor: SystemMouseCursors.click,
                   onTap: () {
@@ -144,7 +145,7 @@ class _HeaderLineState extends State<HeaderLine> {
                           ? Colors.greenAccent
                           : Colors.white,
                       child: const Text("Примеры работ"))),
-              const PopupMenuDivider(),
+          const PopupMenuDivider(height: 2.0,),
               PopupMenuItem(
                   mouseCursor: SystemMouseCursors.click,
                   onTap: () {
@@ -158,7 +159,7 @@ class _HeaderLineState extends State<HeaderLine> {
                           ? Colors.greenAccent
                           : Colors.white,
                       child: const Text("Статьи"))),
-              const PopupMenuDivider(),
+          const PopupMenuDivider(height: 2.0,),
               PopupMenuItem(
                   mouseCursor: SystemMouseCursors.click,
                   onTap: () {
@@ -172,7 +173,7 @@ class _HeaderLineState extends State<HeaderLine> {
                           ? Colors.greenAccent
                           : Colors.white,
                       child: const Text("Акции"))),
-              const PopupMenuDivider(),
+          const PopupMenuDivider(height: 2.0,),
               PopupMenuItem(
                   mouseCursor: SystemMouseCursors.click,
                   onTap: () {
@@ -186,7 +187,7 @@ class _HeaderLineState extends State<HeaderLine> {
                           ? Colors.greenAccent
                           : Colors.white,
                       child: const Text("Термины"))),
-              const PopupMenuDivider(),
+          const PopupMenuDivider(height: 2.0,),
               PopupMenuItem(
                   mouseCursor: SystemMouseCursors.click,
                   onTap: () {
@@ -200,7 +201,7 @@ class _HeaderLineState extends State<HeaderLine> {
                           ? Colors.greenAccent
                           : Colors.white,
                       child: const Text("Частые вопросы"))),
-              const PopupMenuDivider(),
+          const PopupMenuDivider(height: 2.0,),
               PopupMenuItem(
                   mouseCursor: SystemMouseCursors.click,
                   onTap: () {
@@ -214,7 +215,8 @@ class _HeaderLineState extends State<HeaderLine> {
                           ? Colors.greenAccent
                           : Colors.white,
                       child: const Text("Контакты"))),
-            ]);
+          const PopupMenuDivider(height: 2.0,),
+        ]);
 
     final drawerHeader = Container(
       height: 25.0,

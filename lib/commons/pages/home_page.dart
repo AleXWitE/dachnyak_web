@@ -1,5 +1,6 @@
 import 'package:dachnyak_web/commons/models/provider_model.dart';
 import 'package:dachnyak_web/commons/widgets/header_widget.dart';
+import 'package:dachnyak_web/commons/widgets/service_catalog_widget.dart';
 import 'package:dachnyak_web/commons/widgets/title_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,6 +29,7 @@ class _HomePageState extends State<HomePage> {
             child: ListView(
               children: [
                 TitleHeader(),
+                ServiceCatalog(),
                 SizedBox(height: 10000,)
               ],
             ),
