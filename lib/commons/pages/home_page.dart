@@ -13,29 +13,102 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final GlobalKey _titleKey = GlobalKey();
+  late ScrollController _scrollController;
+  Curve curve = Curves.easeIn;
+
+  bool _showCatalog = false;
+  bool _showUpButton = false;
+
+  late double heightOfTitle;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _scrollController = ScrollController(
+      initialScrollOffset: 0.0,
+      keepScrollOffset: true,
+    );
+  }
+
+  void _titleInfo() {
+    RenderBox? renderBox =
+        _titleKey.currentContext?.findRenderObject() as RenderBox;
+    _titleKey.currentContext?.size;
+
+    Size? size = renderBox.size;
+
+    setState(() {
+      heightOfTitle = size.height;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final _provider = Provider.of<ProviderModel>(context);
 
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels >= heightOfTitle) {
+        setState(() {
+          _showUpButton = true;
+          _showCatalog = true;
+        });
+      } else {
+        setState(() {
+          _showUpButton = false;
+          _showCatalog = false;
+        });
+      }
+    });
+
+    Future.delayed(Duration(milliseconds: 1), _titleInfo);
+
     return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            height: 40.0,
-              child: const HeaderLine()),
-          Container(
-            height: MediaQuery.of(context).size.height - 40.0,
-            child: ListView(
-              children: [
-                TitleHeader(),
-                ServiceCatalog(),
-                SizedBox(height: 10000,)
-              ],
-            ),
-          )
-        ]
-      ),
+      body: Column(children: [
+        Container(height: 40.0, child: const HeaderLine()),
+        _showCatalog ? ServiceCatalog() : Container(),
+        Container(
+          height: MediaQuery.of(context).size.height - 40.0,
+          child: ListView(
+            controller: _scrollController,
+            children: [
+              Container(
+                key: _titleKey,
+                child: Column(
+                  children: [
+                    TitleHeader(),
+                    ServiceCatalog(),
+                  ],
+                ),
+              ),
+              Container(
+                decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [Colors.green, Colors.blue],
+                        stops: [0.5, 1.0])),
+                height: 10000,
+              )
+            ],
+          ),
+        )
+      ]),
+      floatingActionButton: !_showUpButton
+          ? null
+          : FloatingActionButton(
+              tooltip: "К началу сайта",
+              child: const Icon(
+                Icons.arrow_circle_up,
+                color: Colors.teal,
+                size: 65.0,
+              ),
+              elevation: 0.0,
+              hoverElevation: 0.0,
+              backgroundColor: const Color.fromARGB(0, 0, 0, 0),
+              onPressed: () => _scrollController.animateTo(0.0,
+                  duration: const Duration(milliseconds: 800), curve: curve)),
     );
   }
 }
