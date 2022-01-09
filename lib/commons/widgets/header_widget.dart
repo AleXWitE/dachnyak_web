@@ -391,17 +391,17 @@ class _HeaderLineState extends State<HeaderLine> {
                     _provider.changeTitle("Примеры работ");
                     Navigator.pushNamed(context, '/examples');
                   }),
-              MaterialButton(
-                  child: const Text("Статьи"),
-                  minWidth: 100.0,
-                  height: 50.0,
-                  color: _provTitle == "Статьи"
-                      ? Colors.greenAccent[300]
-                      : Colors.white,
-                  onPressed: () {
-                    _provider.changeTitle("Статьи");
-                    Navigator.pushNamed(context, '/articles');
-                  }),
+              // MaterialButton(
+              //     child: const Text("Статьи"),
+              //     minWidth: 100.0,
+              //     height: 50.0,
+              //     color: _provTitle == "Статьи"
+              //         ? Colors.greenAccent[300]
+              //         : Colors.white,
+              //     onPressed: () {
+              //       _provider.changeTitle("Статьи");
+              //       Navigator.pushNamed(context, '/articles');
+              //     }),
               MaterialButton(
                   child: const Text("Акции"),
                   minWidth: 100.0,

@@ -183,6 +183,7 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
                         height: 200.0,
@@ -224,6 +225,7 @@ class _HomePageState extends State<HomePage> {
                         width: (MediaQuery.of(context).size.width / 2) - 80.0,
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: const [
                               Text(
                                 "Дачняк",
