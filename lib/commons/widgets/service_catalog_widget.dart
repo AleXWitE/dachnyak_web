@@ -26,6 +26,7 @@ class _ServiceCatalogState extends State<ServiceCatalog> {
     final _provTitle = _provider.siteTitle;
 
     final _popupMenu = PopupMenuButton(
+      onSelected: (value) => Navigator.pushNamed(context, '$value'),
         padding: EdgeInsets.zero,
         tooltip: "Открыть каталог услуг",
         child: Padding(
@@ -50,9 +51,8 @@ class _ServiceCatalogState extends State<ServiceCatalog> {
               mouseCursor: SystemMouseCursors.click,
               onTap: () {
                 _provider.changeTitle("Примеры работ");
-                Navigator.pushNamed(context, '/examples');
               },
-              value: 'examples',
+              value: '/examples',
               child: Container(
                   width: MediaQuery.of(context).size.width,
                   color: _provTitle == "Примеры работ"
@@ -63,24 +63,9 @@ class _ServiceCatalogState extends State<ServiceCatalog> {
           PopupMenuItem(
               mouseCursor: SystemMouseCursors.click,
               onTap: () {
-                _provider.changeTitle("Статьи");
-                Navigator.pushNamed(context, '/articles');
-              },
-              value: 'articles',
-              child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  color: _provTitle == "Статьи"
-                      ? Colors.greenAccent
-                      : Colors.white,
-                  child: const Text("Статьи"))),
-          const PopupMenuDivider(height: 2.0,),
-          PopupMenuItem(
-              mouseCursor: SystemMouseCursors.click,
-              onTap: () {
                 _provider.changeTitle("Акции");
-                Navigator.pushNamed(context, '/discount');
               },
-              value: 'discount',
+              value: '/discount',
               child: Container(
                   width: MediaQuery.of(context).size.width,
                   color: _provTitle == "Акции"
@@ -92,9 +77,8 @@ class _ServiceCatalogState extends State<ServiceCatalog> {
               mouseCursor: SystemMouseCursors.click,
               onTap: () {
                 _provider.changeTitle("Термины");
-                Navigator.pushNamed(context, '/terms');
               },
-              value: 'terms',
+              value: '/terms',
               child: Container(
                   width: MediaQuery.of(context).size.width,
                   color: _provTitle == "Термины"
@@ -106,9 +90,8 @@ class _ServiceCatalogState extends State<ServiceCatalog> {
               mouseCursor: SystemMouseCursors.click,
               onTap: () {
                 _provider.changeTitle("Частые вопросы");
-                Navigator.pushNamed(context, '/q_a');
               },
-              value: 'q_a',
+              value: '/q_a',
               child: Container(
                   width: MediaQuery.of(context).size.width,
                   color: _provTitle == "Частые вопросы"
@@ -120,9 +103,8 @@ class _ServiceCatalogState extends State<ServiceCatalog> {
               mouseCursor: SystemMouseCursors.click,
               onTap: () {
                 _provider.changeTitle("О компании");
-                Navigator.pushNamed(context, '/about');
               },
-              value: 'about',
+              value: '/about',
               child: Container(
                   width: MediaQuery.of(context).size.width,
                   color: _provTitle == "О компании"
@@ -134,9 +116,8 @@ class _ServiceCatalogState extends State<ServiceCatalog> {
               mouseCursor: SystemMouseCursors.click,
               onTap: () {
                 _provider.changeTitle("Контакты");
-                Navigator.pushNamed(context, '/contacts');
               },
-              value: 'contacts',
+              value: '/contacts',
               child: Container(
                   width: MediaQuery.of(context).size.width,
                   color: _provTitle == "Контакты"
