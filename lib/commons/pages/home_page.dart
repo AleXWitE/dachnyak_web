@@ -61,7 +61,8 @@ class _HomePageState extends State<HomePage> {
       ),
       child: const Text(
         "Дачняк",
-        style: TextStyle(color: Colors.white, fontSize: 36.0, fontWeight: FontWeight.bold),
+        style: TextStyle(
+            color: Colors.white, fontSize: 36.0, fontWeight: FontWeight.bold),
       ),
     );
 
@@ -91,14 +92,18 @@ class _HomePageState extends State<HomePage> {
     );
 
     Widget galleryBlock = Container(
-      color: Colors.greenAccent,
+        color: Colors.greenAccent,
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: Stack(
           children: [
             Positioned(top: 25.0, left: 50.0, child: galleryBlockHeader),
             Positioned(top: 140.0, left: 50.0, child: galleryBlockDesc),
-            Positioned(bottom: 200.0, left: 50.0, right: 50.0, child: galleryBlockSubscription),
+            Positioned(
+                bottom: 200.0,
+                left: 50.0,
+                right: 50.0,
+                child: galleryBlockSubscription),
           ],
         ));
 
@@ -124,8 +129,15 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            const Text("Наше видео", style: TextStyle(fontSize: 36.0),),
-            const Divider(color: Colors.teal, height: 5.0, thickness: 5.0,),
+            const Text(
+              "Наше видео",
+              style: TextStyle(fontSize: 36.0),
+            ),
+            const Divider(
+              color: Colors.teal,
+              height: 5.0,
+              thickness: 5.0,
+            ),
             Container(
               width: MediaQuery.of(context).size.width - 100.0,
               height: MediaQuery.of(context).size.height - 250.0,
@@ -142,38 +154,93 @@ class _HomePageState extends State<HomePage> {
       color: Colors.greenAccent,
       width: MediaQuery.of(context).size.width,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          RichText(
-            textAlign: TextAlign.center,
-          text: const TextSpan(text: "Дачняк\n", style: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold), children: [
-            TextSpan(text: "оказываем услуги\n", style: TextStyle(fontSize: 30.0)),
-            TextSpan(text: "по расчистке, озеленению и обустройству приусадебных участков ", style: TextStyle(fontSize: 20.0)),
-          ]),
-        ),
-          const Padding(padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),child: Divider(height: 3.0, thickness: 3.0, color: Colors.teal,)),
+          const Text("Дачняк",
+              style: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold)),
+          const Text("оказываем услуги", style: TextStyle(fontSize: 30.0)),
+          const Text(
+              "по расчистке, озеленению и обустройству приусадебных участков ",
+              style: TextStyle(fontSize: 20.0)),
           MediaQuery.of(context).size.width < 750
-              ? Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(height: 200.0, width: MediaQuery.of(context).size.width - 50.0, color: Colors.blueGrey, child: const Center(child: Text("Picture"),),),
-                    RichText(
-                      text: const TextSpan(text: "Дачняк\n", style: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold), children: [
-                        TextSpan(text: "оказываем услуги\n", style: TextStyle(fontSize: 30.0)),
-                        TextSpan(text: "по расчистке, озеленению и обустройству приусадебных участков", style: TextStyle(fontSize: 20.0)),
-                      ]),
-                    )
-          ],)
-              : Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(height: 200.0, width: 200.0, color: Colors.blueGrey, child: const Center(child: Text("Picture"),),),
-                    RichText(
-                      text: const TextSpan(text: "Дачняк\n", style: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold), children: [
-                        TextSpan(text: "оказываем услуги\n", style: TextStyle(fontSize: 30.0)),
-                        TextSpan(text: "по расчистке, озеленению и обустройству приусадебных участков ", style: TextStyle(fontSize: 20.0)),
-                      ]),
-                    )
-          ],)
+              ? const Padding(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
+                  child: Divider(
+                    height: 3.0,
+                    thickness: 3.0,
+                    color: Colors.teal,
+                  ))
+              : const Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: Divider(
+                    height: 3.0,
+                    thickness: 3.0,
+                    color: Colors.teal,
+                  )),
+          MediaQuery.of(context).size.width < 750
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 200.0,
+                        width: MediaQuery.of(context).size.width,
+                        color: Colors.blueGrey,
+                        child: const Center(
+                          child: Text("Picture"),
+                        ),
+                      ),
+                      const Text(
+                        "\nДачняк",
+                        style: TextStyle(
+                            fontSize: 36.0, fontWeight: FontWeight.bold),
+                      ),
+                      const Text("оказываем услуги",
+                          style: TextStyle(fontSize: 30.0)),
+                      const Text(
+                          "по расчистке, озеленению и обустройству приусадебных участков ",
+                          style: TextStyle(fontSize: 20.0)),
+                    ],
+                  ),
+                )
+              : Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 200.0,
+                        width: (MediaQuery.of(context).size.width / 2) - 60.0,
+                        color: Colors.blueGrey,
+                        child: const Center(
+                          child: Text("Picture"),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 20.0,
+                      ),
+                      SizedBox(
+                        width: (MediaQuery.of(context).size.width / 2) - 80.0,
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: const [
+                              Text(
+                                "Дачняк",
+                                style: TextStyle(
+                                    fontSize: 36.0,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text("оказываем услуги",
+                                  style: TextStyle(fontSize: 30.0)),
+                              Text(
+                                  "по расчистке, озеленению и обустройству приусадебных участков ",
+                                  style: TextStyle(fontSize: 20.0)),
+                            ]),
+                      ),
+                    ],
+                  ),
+                )
         ],
       ),
     );
@@ -197,7 +264,10 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               galleryBlock,
-              const Divider(height: 1.0, color: Colors.blueGrey,),
+              const Divider(
+                height: 1.0,
+                color: Colors.blueGrey,
+              ),
               infoBlock,
               // videoBlock,
               Container(

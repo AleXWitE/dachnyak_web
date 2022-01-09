@@ -29,17 +29,38 @@ class Dachnyak extends StatelessWidget {
       ),
       home: HomePage(),
       initialRoute: '/home',
-      routes: {
-        '/home': (BuildContext context) => HomePage(),
-        '/contacts': (BuildContext context) => ContactPage(),
-        '/q_a': (BuildContext context) => QAPage(),
-        '/terms': (BuildContext context) => TermsPage(),
-        '/discount': (BuildContext context) => DiscountPage(),
-        // '/articles': (BuildContext context) => ArticlesPage(),
-        '/examples': (BuildContext context) => ExamplesPage(),
-        '/about': (BuildContext context) => AboutPage(),
-        '/price': (BuildContext context) => PricePage(),
-  },
+      onGenerateRoute: (settings) {
+        switch(settings.name){
+        case '/home':
+          return PageRouteBuilder(pageBuilder: (_, __, ___) => HomePage());
+        case '/contacts':
+          return PageRouteBuilder(pageBuilder: (_, __, ___) => ContactPage());
+        case '/q_a':
+          return PageRouteBuilder(pageBuilder: (_, __, ___) => QAPage());
+        case '/terms':
+          return PageRouteBuilder(pageBuilder: (_, __, ___) => TermsPage());
+        case '/discount':
+          return PageRouteBuilder(pageBuilder: (_, __, ___) => DiscountPage());
+        case '/examples':
+          return PageRouteBuilder(pageBuilder: (_, __, ___) => ExamplesPage());
+        case '/about':
+          return PageRouteBuilder(pageBuilder: (_, __, ___) => AboutPage());
+        case '/price':
+          return PageRouteBuilder(pageBuilder: (_, __, ___) => PricePage());
+
+        }
+      },
+  //     routes: {
+  //       '/home': (BuildContext context) => HomePage(),
+  //       '/contacts': (BuildContext context) => ContactPage(),
+  //       '/q_a': (BuildContext context) => QAPage(),
+  //       '/terms': (BuildContext context) => TermsPage(),
+  //       '/discount': (BuildContext context) => DiscountPage(),
+  //       // '/articles': (BuildContext context) => ArticlesPage(),
+  //       '/examples': (BuildContext context) => ExamplesPage(),
+  //       '/about': (BuildContext context) => AboutPage(),
+  //       '/price': (BuildContext context) => PricePage(),
+  // },
     );
   }
 }

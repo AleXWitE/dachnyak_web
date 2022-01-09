@@ -48,61 +48,79 @@ class _TitleHeaderState extends State<TitleHeader> {
     );
 
     final textAlert = MouseRegion(
-      cursor: SystemMouseCursors.click,
+        cursor: SystemMouseCursors.click,
         child: GestureDetector(
-      child: Text(
-        "Заказать звонок",
-        style: TextStyle(
-            decoration: TextDecoration.underline,
-            color: Colors.green,
-            fontSize: 20.0),
-      ),
-      onTap: () => showDialog<String>(
-        context: context,
-        builder: (BuildContext context) => AlertDialog(
-          title: const Text('Заказать звонок'),
-          content: Column(children: [
-            Text('AlertDialog description'),
-          ]),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => Navigator.pop(context, 'OK'),
-              child: const Text('Отправитьзаявку'),
+          child: Text(
+            "Заказать звонок",
+            style: TextStyle(
+                decoration: TextDecoration.underline,
+                color: Colors.green,
+                fontSize: 20.0),
+          ),
+          onTap: () => showDialog<String>(
+            context: context,
+            builder: (BuildContext context) => AlertDialog(
+              title: const Text('Заказать звонок'),
+              content: Column(children: [
+                Text('AlertDialog description'),
+              ]),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.pop(context, 'OK'),
+                  child: const Text('Отправитьзаявку'),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-    ));
+          ),
+        ));
 
-    final openTime = RichText(
-      text: TextSpan(text: "c ", style: TextStyle(fontSize: 20.0), children: [
-        TextSpan(text: "9:00 ", style: TextStyle(fontSize: 30.0)),
-        TextSpan(text: "до ", style: TextStyle(fontSize: 20.0)),
-        TextSpan(text: "19:00\n", style: TextStyle(fontSize: 30.0)),
-        TextSpan(text: "без выходных и перерывов", style: TextStyle(fontSize: 16.0, fontStyle: FontStyle.italic)),
-      ]),
+    final openTime = Column(
+      children: [
+        SizedBox(
+          width: 200.0,
+          child: Row(
+            children: const [
+              Text(
+                "c ",
+                style: TextStyle(fontSize: 20.0),
+              ),
+              Text("9:00 ", style: TextStyle(fontSize: 30.0)),
+              Text("до ", style: TextStyle(fontSize: 20.0)),
+              Text("19:00", style: TextStyle(fontSize: 30.0)),
+            ],
+          ),
+        ),
+        const Text("без выходных и перерывов",
+            style: TextStyle(fontSize: 16.0, fontStyle: FontStyle.italic)),
+      ],
     );
 
-    final drawerHeaderTitle = Container(
+    final drawerHeaderTitle = SizedBox(
         width: MediaQuery.of(context).size.width,
         child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        logoButton,
-        telNumber,
-        city,
-        textAlert,
-        openTime,
-      ],
-    ));
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            logoButton,
+            const SizedBox(
+              height: 10.0,
+            ),
+            telNumber,
+            city,
+            textAlert,
+            openTime,
+            const SizedBox(
+              height: 10.0,
+            ),
+          ],
+        ));
 
-    final rowHeaderTitle = Container(
+    final rowHeaderTitle = SizedBox(
       width: MediaQuery.of(context).size.width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           logoButton,
-          Container(
+          SizedBox(
             height: 100.0,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -113,11 +131,15 @@ class _TitleHeaderState extends State<TitleHeader> {
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [textAlert,],
+                  children: [
+                    textAlert,
+                  ],
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [openTime,],
+                  children: [
+                    openTime,
+                  ],
                 )
               ],
             ),
@@ -136,11 +158,15 @@ class _TitleHeaderState extends State<TitleHeader> {
         ),
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [textAlert,],
+          children: [
+            textAlert,
+          ],
         ),
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [openTime,],
+          children: [
+            openTime,
+          ],
         )
       ],
     );
