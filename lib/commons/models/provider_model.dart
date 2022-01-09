@@ -7,5 +7,4 @@ class ProviderModel extends ChangeNotifier{
     siteTitle = _input;
     notifyListeners();
   }
-
 }

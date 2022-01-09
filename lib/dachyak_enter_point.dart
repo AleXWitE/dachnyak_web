@@ -35,7 +35,7 @@ class Dachnyak extends StatelessWidget {
         '/q_a': (BuildContext context) => QAPage(),
         '/terms': (BuildContext context) => TermsPage(),
         '/discount': (BuildContext context) => DiscountPage(),
-        '/articles': (BuildContext context) => ArticlesPage(),
+        // '/articles': (BuildContext context) => ArticlesPage(),
         '/examples': (BuildContext context) => ExamplesPage(),
         '/about': (BuildContext context) => AboutPage(),
         '/price': (BuildContext context) => PricePage(),

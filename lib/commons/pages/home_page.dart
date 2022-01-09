@@ -33,11 +33,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _titleInfo() {
-    RenderBox? renderBox =
+    final RenderBox renderBox =
         _titleKey.currentContext?.findRenderObject() as RenderBox;
     _titleKey.currentContext?.size;
 
-    Size? size = renderBox.size;
+    final Size size = renderBox.size;
 
     setState(() {
       heightOfTitle = size.height;
@@ -45,8 +45,62 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final _provider = Provider.of<ProviderModel>(context);
+
+    Widget galleryBlockHeader = Container(
+      padding: const EdgeInsets.all(20.0),
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(100, 0, 0, 0),
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+      child: const Text(
+        "Дачняк",
+        style: TextStyle(color: Colors.white, fontSize: 36.0, fontWeight: FontWeight.bold),
+      ),
+    );
+
+    Widget galleryBlockDesc = Container(
+      padding: const EdgeInsets.all(20.0),
+      width: MediaQuery.of(context).size.width / 1.5,
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(100, 0, 0, 0),
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+      child: const Text(
+        "Все сроки прописаны в договоре",
+        style: TextStyle(color: Colors.white, fontSize: 36.0),
+      ),
+    );
+
+    Widget galleryBlockSubscription = Container(
+      padding: const EdgeInsets.all(20.0),
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(100, 0, 0, 0),
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+      child: const Text(
+        "Многолетний опыт позволяет спрогнозировать все возможные риски",
+        style: TextStyle(color: Colors.white, fontSize: 20.0),
+      ),
+    );
+
+    Widget galleryBlock = Container(
+      color: Colors.greenAccent,
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: Stack(
+          children: [
+            Positioned(top: 25.0, left: 50.0, child: galleryBlockHeader),
+            Positioned(top: 140.0, left: 50.0, child: galleryBlockDesc),
+            Positioned(bottom: 200.0, left: 50.0, right: 50.0, child: galleryBlockSubscription),
+          ],
+        ));
 
     _scrollController.addListener(() {
       if (_scrollController.position.pixels >= heightOfTitle) {
@@ -62,26 +116,90 @@ class _HomePageState extends State<HomePage> {
       }
     });
 
-    Future.delayed(Duration(milliseconds: 1), _titleInfo);
+    Widget videoBlock = Container(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      color: const Color.fromARGB(255, 200, 200, 200),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            const Text("Наше видео", style: TextStyle(fontSize: 36.0),),
+            const Divider(color: Colors.teal, height: 5.0, thickness: 5.0,),
+            Container(
+              width: MediaQuery.of(context).size.width - 100.0,
+              height: MediaQuery.of(context).size.height - 250.0,
+              color: Colors.blueGrey,
+              child: const Center(child: Text("Video")),
+            ),
+          ],
+        ),
+      ),
+    );
+
+    Widget infoBlock = Container(
+      padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 40.0),
+      color: Colors.greenAccent,
+      width: MediaQuery.of(context).size.width,
+      child: Column(
+        children: [
+          RichText(
+            textAlign: TextAlign.center,
+          text: const TextSpan(text: "Дачняк\n", style: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold), children: [
+            TextSpan(text: "оказываем услуги\n", style: TextStyle(fontSize: 30.0)),
+            TextSpan(text: "по расчистке, озеленению и обустройству приусадебных участков ", style: TextStyle(fontSize: 20.0)),
+          ]),
+        ),
+          const Padding(padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),child: Divider(height: 3.0, thickness: 3.0, color: Colors.teal,)),
+          MediaQuery.of(context).size.width < 750
+              ? Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(height: 200.0, width: MediaQuery.of(context).size.width - 50.0, color: Colors.blueGrey, child: const Center(child: Text("Picture"),),),
+                    RichText(
+                      text: const TextSpan(text: "Дачняк\n", style: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold), children: [
+                        TextSpan(text: "оказываем услуги\n", style: TextStyle(fontSize: 30.0)),
+                        TextSpan(text: "по расчистке, озеленению и обустройству приусадебных участков", style: TextStyle(fontSize: 20.0)),
+                      ]),
+                    )
+          ],)
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(height: 200.0, width: 200.0, color: Colors.blueGrey, child: const Center(child: Text("Picture"),),),
+                    RichText(
+                      text: const TextSpan(text: "Дачняк\n", style: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold), children: [
+                        TextSpan(text: "оказываем услуги\n", style: TextStyle(fontSize: 30.0)),
+                        TextSpan(text: "по расчистке, озеленению и обустройству приусадебных участков ", style: TextStyle(fontSize: 20.0)),
+                      ]),
+                    )
+          ],)
+        ],
+      ),
+    );
+
+    Future.delayed(const Duration(milliseconds: 1), _titleInfo);
 
     return Scaffold(
       body: Column(children: [
-        Container(height: 40.0, child: const HeaderLine()),
+        const SizedBox(height: 40.0, child: HeaderLine()),
         _showCatalog ? ServiceCatalog() : Container(),
-        Container(
+        SizedBox(
           height: MediaQuery.of(context).size.height - 40.0,
           child: ListView(
             controller: _scrollController,
             children: [
-              Container(
+              Column(
                 key: _titleKey,
-                child: Column(
-                  children: [
-                    TitleHeader(),
-                    ServiceCatalog(),
-                  ],
-                ),
+                children: [
+                  TitleHeader(),
+                  ServiceCatalog(),
+                ],
               ),
+              galleryBlock,
+              const Divider(height: 1.0, color: Colors.blueGrey,),
+              infoBlock,
+              // videoBlock,
               Container(
                 decoration: const BoxDecoration(
                     gradient: LinearGradient(

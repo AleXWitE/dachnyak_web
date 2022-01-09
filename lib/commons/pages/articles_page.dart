@@ -11,6 +11,15 @@ class ArticlesPage extends StatefulWidget {
 }
 
 class _ArticlesPageState extends State<ArticlesPage> {
+  final GlobalKey _titleKey = GlobalKey();
+  late ScrollController _scrollController;
+  Curve curve = Curves.easeIn;
+
+  bool _showCatalog = false;
+  bool _showUpButton = false;
+
+  late double heightOfTitle;
+
   @override
   void initState() {
     super.initState();
