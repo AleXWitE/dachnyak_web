@@ -1,8 +1,10 @@
+import 'package:dachnyak_web/commons/models/data_models.dart';
 import 'package:dachnyak_web/commons/models/provider_model.dart';
 import 'package:dachnyak_web/commons/widgets/header_widget.dart';
 import 'package:dachnyak_web/commons/widgets/service_catalog_widget.dart';
 import 'package:dachnyak_web/commons/widgets/title_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,6 +23,36 @@ class _HomePageState extends State<HomePage> {
   bool _showUpButton = false;
 
   late double heightOfTitle;
+
+  List<CatalogBlockModel> catalogList = [
+    CatalogBlockModel(
+        id: 0,
+        hover: false,
+        title: "О компании",
+        img:
+            "https://pbs.twimg.com/profile_images/947873659938639878/oXpMnav3.jpg",
+        link: '/about'),
+    CatalogBlockModel(
+        id: 1,
+        hover: false,
+        title: "Примеры работ",
+        img: "https://r.mt.ru/r27/photoFA17/20485183647-0/jpg/bp.jpeg",
+        link: '/examples'),
+    CatalogBlockModel(
+        id: 2,
+        hover: false,
+        title: "Акции",
+        img:
+            "https://avatars.mds.yandex.net/get-zen_doc/1706643/pub_5e10f1d398930900b3abc45f_5e18b32c3642b600afd3a2dd/scale_1200",
+        link: '/discount'),
+    CatalogBlockModel(
+        id: 3,
+        hover: false,
+        title: "Контакты",
+        img:
+            "https://im0-tub-ru.yandex.net/i?id=db45bd28e86ee0a06050cfbdef12ee67-l&ref=rim&n=13&w=1068&h=1315",
+        link: '/contacts'),
+  ];
 
   @override
   void initState() {
@@ -92,7 +124,7 @@ class _HomePageState extends State<HomePage> {
     );
 
     Widget galleryBlock = Container(
-        color: Colors.greenAccent,
+        color: Colors.greenAccent[400],
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: Stack(
@@ -121,33 +153,33 @@ class _HomePageState extends State<HomePage> {
       }
     });
 
-    Widget videoBlock = Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height,
-      color: const Color.fromARGB(255, 200, 200, 200),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            const Text(
-              "Наше видео",
-              style: TextStyle(fontSize: 36.0),
-            ),
-            const Divider(
-              color: Colors.teal,
-              height: 5.0,
-              thickness: 5.0,
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width - 100.0,
-              height: MediaQuery.of(context).size.height - 250.0,
-              color: Colors.blueGrey,
-              child: const Center(child: Text("Video")),
-            ),
-          ],
-        ),
-      ),
-    );
+    // Widget videoBlock = Container(
+    //   width: MediaQuery.of(context).size.width,
+    //   height: MediaQuery.of(context).size.height,
+    //   color: const Color.fromARGB(255, 200, 200, 200),
+    //   child: Center(
+    //     child: Column(
+    //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    //       children: [
+    //         const Text(
+    //           "Наше видео",
+    //           style: TextStyle(fontSize: 36.0),
+    //         ),
+    //         const Divider(
+    //           color: Colors.teal,
+    //           height: 5.0,
+    //           thickness: 5.0,
+    //         ),
+    //         Container(
+    //           width: MediaQuery.of(context).size.width - 100.0,
+    //           height: MediaQuery.of(context).size.height - 250.0,
+    //           color: Colors.blueGrey,
+    //           child: const Center(child: Text("Video")),
+    //         ),
+    //       ],
+    //     ),
+    //   ),
+    // );
 
     Widget infoBlock = Container(
       padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 40.0),
@@ -247,6 +279,230 @@ class _HomePageState extends State<HomePage> {
       ),
     );
 
+    Widget _catalogColumn = Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            for (var item in catalogList)
+              Column(children: [
+                MouseRegion(
+                  onEnter: (event) {
+                    setState(() {
+                      item.hover = !item.hover;
+                    });
+                  },
+                  onExit: (event) {
+                    setState(() {
+                      item.hover = !item.hover;
+                    });
+                  },
+                  child: Container(
+                    height: 500.0,
+                    width: MediaQuery.of(context).size.width - 40.0,
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                    ),
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        Positioned(
+                            top: 0.0,
+                            bottom: 0.0,
+                            left: 0.0,
+                            right: 0.0,
+                            child: Image.network(
+                              item.img,
+                              fit: BoxFit.cover,
+                            )),
+                        item.hover != true
+                            ? Container()
+                            : Positioned(
+                                top: 0.0,
+                                bottom: 0.0,
+                                left: 0.0,
+                                right: 0.0,
+                                child: Container(
+                                  color: const Color.fromARGB(100, 0, 0, 0),
+                                )),
+                        Positioned(
+                            left: 20.0,
+                            bottom: 20.0,
+                            child: item.hover != true
+                                ? Text(
+                                    item.title,
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 30.0,
+                                        fontWeight: FontWeight.bold),
+                                  )
+                                : MaterialButton(
+                                    height: 40.0,
+                                    color: Colors.cyan,
+                                    minWidth: 250.0,
+                                    child: const Center(
+                                        child: Text(
+                                      "Подробнее",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 24.0,
+                                          fontWeight: FontWeight.bold),
+                                    )),
+                                    onPressed: () {
+                                      _provider.changeTitle(item.title);
+                                      Navigator.pushNamed(context, item.link);
+                                    })),
+                        item.hover != true
+                            ? Container()
+                            : Positioned(
+                                left: 20.0,
+                                top: 20.0,
+                                child: Text(
+                                  item.title,
+                                  style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 30.0,
+                                      fontWeight: FontWeight.bold),
+                                )),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 25.0,
+                )
+              ]),
+          ],
+        ));
+
+    Widget _catalogRow = Padding(padding: const EdgeInsets.symmetric(horizontal: 20.0), child: Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        for (var item in catalogList)
+          Row(children: [
+            MouseRegion(
+              onEnter: (event) {
+                setState(() {
+                  item.hover = !item.hover;
+                });
+              },
+              onExit: (event) {
+                setState(() {
+                  item.hover = !item.hover;
+                });
+              },
+              child: item.id == 0 && MediaQuery.of(context).size.width > 750 && MediaQuery.of(context).size.width < 1124
+                  ? Container()
+                  : Container(
+                height: 500.0,
+                width: MediaQuery.of(context).size.width > 750 && MediaQuery.of(context).size.width < 1124
+                    ? (MediaQuery.of(context).size.width - 200.0) / 3
+                    : (MediaQuery.of(context).size.width - 200.0) / 4,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                ),
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    Positioned(
+                        top: 0.0,
+                        bottom: 0.0,
+                        left: 0.0,
+                        right: 0.0,
+                        child: Image.network(
+                          item.img,
+                          fit: BoxFit.cover,
+                        )),
+                    item.hover != true
+                        ? Container()
+                        : Positioned(
+                        top: 0.0,
+                        bottom: 0.0,
+                        left: 0.0,
+                        right: 0.0,
+                        child: Container(
+                          color: const Color.fromARGB(100, 0, 0, 0),
+                        )),
+                    Positioned(
+                        left: 20.0,
+                        bottom: 20.0,
+                        child: item.hover != true
+                            ? Text(
+                          item.title,
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 30.0,
+                              fontWeight: FontWeight.bold),
+                        )
+                            : MaterialButton(
+                            height: 40.0,
+                            color: Colors.cyan,
+                            minWidth: 250.0,
+                            child: const Center(
+                                child: Text(
+                                  "Подробнее",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 24.0,
+                                      fontWeight: FontWeight.bold),
+                                )),
+                            onPressed: () {
+                              _provider.changeTitle(item.title);
+                              Navigator.pushNamed(context, item.link);
+                            })),
+                    item.hover != true
+                        ? Container()
+                        : Positioned(
+                        left: 20.0,
+                        top: 20.0,
+                        child: Text(
+                          item.title,
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 30.0,
+                              fontWeight: FontWeight.bold),
+                        )),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(
+              width: item.id != 3 ? 25.0 : 0.0,
+            )
+          ]),
+      ],
+    ));
+
+    Widget catalogBlock = Container(
+      padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 40.0),
+      color: Colors.greenAccent[100],
+      width: MediaQuery.of(context).size.width,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const Text("Каталог услуг",
+              style: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold)),
+          MediaQuery.of(context).size.width < 750
+              ? const Padding(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
+                  child: Divider(
+                    height: 3.0,
+                    thickness: 3.0,
+                    color: Colors.teal,
+                  ))
+              : const Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: Divider(
+                    height: 3.0,
+                    thickness: 3.0,
+                    color: Colors.teal,
+                  )),
+          MediaQuery.of(context).size.width < 750 ? _catalogColumn : _catalogRow
+        ],
+      ),
+    );
+
     Future.delayed(const Duration(milliseconds: 1), _titleInfo);
 
     return Scaffold(
@@ -271,6 +527,15 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.blueGrey,
               ),
               infoBlock,
+              const Divider(
+                height: 1.0,
+                color: Colors.blueGrey,
+              ),
+              catalogBlock,
+              const Divider(
+                height: 1.0,
+                color: Colors.blueGrey,
+              ),
               // videoBlock,
               Container(
                 decoration: const BoxDecoration(
